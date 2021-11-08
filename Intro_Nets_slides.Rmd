@@ -45,7 +45,7 @@ no_marg <- c(0, 0, 0, 0)
 
 Asegúrate de descargar los materiales del taller:
 
-https://github.com/mcramosf/intro_analisis_redes_RLP
+https://github.com/mcramosf/intro_sna_LatinR
 
 ---
 class: left, top
@@ -744,14 +744,14 @@ g1["M","H"] <- FALSE
 g1 <- delete_vertices(g1, c("H", "M"))
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, fig.dim = c(8, 6)}
 plot(g1,
      vertex.size = 20,
      vertex.color = V(g1)$color,
      vertex.label.color= V(g1)$lcolor, 
      vertex.label.family = "Helvetica",
      vertex.frame.color = "black",
-     vertex.label.cex= 2.5,
+     vertex.label.cex= 2,
      edge.color = "#4c4ef4", 
      edge.width = 5)
 ```
