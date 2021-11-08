@@ -45,7 +45,7 @@ no_marg <- c(0, 0, 0, 0)
 
 Asegúrate de descargar los materiales del taller:
 
-https://github.com/mcramosf/intro_sna_LatinR
+https://github.com/mcramosf/intro_sna_LatinR 
 
 ---
 class: left, top
