@@ -1,0 +1,65 @@
+.countdown {
+  background: inherit;
+  position: absolute;
+  cursor: pointer;
+  font-size: 5em;
+  line-height: 1;
+  border-color: #4c4ef4;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 15px;
+  margin: 0%;
+  padding: 60px;
+  text-align: center;
+}
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.countdown .countdown-time {
+  background: none;
+  font-size: 100%;
+  padding: 0;
+}
+.countdown-digits {
+  color: #4c4ef4;
+}
+.countdown.running {
+  border-color: #4c4ef4;
+  background-color: #4c4ef4;
+}
+.countdown.running .countdown-digits {
+  color: #4c4ef4;
+}
+.countdown.finished {
+  border-color: #4446DB;
+  background-color: #4c4ef4;
+}
+.countdown.finished .countdown-digits {
+  color: #4c4ef4;
+}
+.countdown.running.warning {
+  border-color: #CFAE24;
+  background-color: #E6C229;
+}
+.countdown.running.warning .countdown-digits {
+  color: #39300A;
+}
+
+@-webkit-keyframes blink {
+	from {opacity: 1}
+	50%  {opacity: 0.1}
+	to   {opacity: 1}
+}
+
+@keyframes blink {
+	from {opacity: 1}
+	50%  {opacity: 0.1}
+	to   {opacity: 1}
+}
+
+.countdown.running.blink-colon .countdown-digits.colon {
+  -webkit-animation: blink 2s steps(1, end) 0s infinite;
+          animation: blink 2s steps(1, end) 0s infinite;
+}

@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción al análisis de redes con R</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="María Cristina Ramos" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="latinR.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Introducción al análisis de redes con R
+## LatinR 2021
+### María Cristina Ramos
+### 2021/11/08
+
+---
+
+
+class: center, top
+
+
+
+
+
+
+# Antes de empezar...
+
+Asegúrate de descargar los materiales del taller:
+
+https://github.com/mcramosf/intro_analisis_redes_RLP
+
+---
+class: left, top
+
+# Antes de empezar...
+
+Asegúrate de descargar los paquetes que necesitamos:
+&lt;br&gt;
+
+**igraph** para analizar redes
+
+```r
+install.packages("igraph")
+```
+
+
+**igraphdata** para obtener datos
+
+```r
+install.packages("igraphdata")
+```
+
+---
+class: chapter-slide
+
+.center[# Primera gráfica]
+
+.center[## ¡Hora de escribir código!]
+---
+class: left, top
+
+# Nuestra primera gráfica de redes 
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-4-1.png" width="504" /&gt;
+]
+
+---
+class: center, middle
+
+# Elementos de una red
+
+---
+class: left, top
+
+# Elementos de una red 
+
+- Vértices o nodos&lt;br&gt;
+  *(vertices or nodes)*
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-5-1.png" width="504" /&gt;
+]
+---
+class: left, top
+
+# Elementos de una red 
+
+- Vínculos o conexiones&lt;br&gt;
+  *(edges or ties)* 
+
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-6-1.png" width="504" /&gt;
+]
+
+---
+class: left, top
+
+# Red
+
+El conjunto de vértices y sus relaciones.
+
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-7-1.png" width="504" /&gt;
+]
+
+--- 
+class: left, top
+
+# Ejemplos de vértices y vínculos
+
+---
+class: center, middle
+
+# Atributos
+
+---
+class: left, top
+
+# Atributos de los vértices
+
+![img_polarization](images/polarization.png)
+---
+class: left, top
+
+# Atributos de los vínculos
+
+## 1. Dirección
+
+.pull-left[
+- Vínculos dirigidos&lt;br&gt;
+*(directed edges)*
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-8-1.png" width="504" /&gt;
+]
+
+.pull-right[
+- Vínculos no dirigidos&lt;br&gt;
+*(undirected edges)*
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-9-1.png" width="504" /&gt;
+]
+
+---
+class: left, top
+
+# Atributos de los vínculos
+
+## 2. Pesos o ponderaciones
+
+.pull-left[
+- Vínculos sin peso &lt;br&gt;
+*(unweighted edges)*
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-10-1.png" width="504" /&gt;
+]
+
+.pull-right[
+- Vínculos con peso&lt;br&gt;
+*(weighted edges)*
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-11-1.png" width="504" /&gt;
+]
+
+---
+class: chapter-slide
+
+.center[# Inspección de redes]
+
+.center[## ¡Hora de escribir código!]
+
+---
+class: left, top
+
+# Características generales de la red
+
+.left[
++ Tamaño de red&lt;br&gt;
+(número de vértices)
++ Número de vínculos
++ Tipo de red 
+  - dirigida o no dirigida
+  - ponderada o no ponderada
++ Atributos
+  - de la red 
+  - de los vértices
+  - de los vínculos
+]
+
+---
+class: center, top
+
+# ¡Tu turno!
+
+Carga y explora la red de profesores en una universidad de Inglaterra.
+
+.left[
+1. ¿Cuántos vértices tiene la red?
+2. ¿Cuántos vínculos tiene la red?
+3. ¿La red es dirigida o no dirigida? 
+4. ¿Cuál es el rango de los pesos de vínculos? 
+]
+
+<div class="countdown" id="timer_61889d14" style="right:0;bottom:0;left:0;margin:0%;padding:60px;font-size:5em;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+#Soluciones
+
+
+```r
+data("UKfaculty")
+UKfaculty
+```
+
+```
+*## IGRAPH 6f42903 D-W- 81 817 -- 
+## + attr: Type (g/c), Date (g/c), Citation
+## | (g/c), Author (g/c), Group (v/n), weight
+## | (e/n)
+## + edges from 6f42903:
+##  [1] 57-&gt;52 76-&gt;42 12-&gt;69 43-&gt;34 28-&gt;47 58-&gt;51
+##  [7]  7-&gt;29 40-&gt;71  5-&gt;37 48-&gt;55  6-&gt;58 21-&gt; 8
+## [13] 28-&gt;69 43-&gt;21 67-&gt;58 65-&gt;42  5-&gt;67 52-&gt;75
+## [19] 37-&gt;64  4-&gt;36 12-&gt;49 19-&gt;46 37-&gt; 9 74-&gt;36
+## [25] 62-&gt; 1 15-&gt; 2 72-&gt;49 46-&gt;62  2-&gt;29 40-&gt;12
+## [31] 22-&gt;29 71-&gt;69  4-&gt; 3 37-&gt;69  5-&gt; 6 77-&gt;13
+## + ... omitted several edges
+```
+
+
+```r
+summary(E(UKfaculty)$weight)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+*##   1.000   2.000   2.000   4.565   6.000  16.000
+```
+---
+class: center, middle
+
+# Visualización de redes
+
+---
+# Dos métodos
+
+.pull-left[Opción 1: Establecer las propiedades visuales fuera de la función `plot()`
+
+1. Configurar los atributos de los vértices y/o vínculos en el objeto de tipo red
+
+2. Graficar la red
+
+
+```r
+# 1: crear/transformar el atributo 
+V(karate)$color &lt;- "dodgerblue"
+
+# 2: graficar la red
+plot(karate)
+```
+]
+
+.pull-right[Opción 2: Establecer las propiedades visuales dentro de la función `plot()`
+
+1. Utiliza los argumentos de la función
+
+
+```r
+# 1: utilizar el argumento
+
+plot(karate,
+     vertex.color = "dodgerblue")
+```
+
+]
+---
+class: left, top
+
+# Parámetros de visualización: vértices
+
+vertex.[parámetro] =&lt;br&gt;
+(e.g., vertex.color =)
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; argumento &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; significado &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; propósito u opciones &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; color &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; color &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; color del vértice &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; shape &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; forma &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; círculo, cuadrado, rectángulo, esfera, etc. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; size &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; tamaño &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; predeterminado = 15 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; label &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; etiqueta &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; - &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; label.family &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; fuente de etiqueta &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Helvetica, Times &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; label.font &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; opciones de fuente &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1= simple, 2= negrita, 3= cursiva, 4 = cursiva y negrita &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; label.cex &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; tamaño de fuente &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; - &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; label.dist &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; distancia de etiqueta &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; distancia entre la etiqueta y el vértice &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt;  &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Parámetros de visualización: vínculos
+
+edge.[parámetro] = &lt;br&gt;
+(e.g., edge.color =)
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; argumento &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; significado &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; propósito u opciones &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lty &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; tipo de línea &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 1 = sólida, 2 = discontinua, 3 = punteada, 4 = punto y línea, etc. &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; width &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ancho de línea &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; predeterminado = 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; arrow.width &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; ancho de flecha &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; predeterminado = 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; arrow.size &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; tamaño de flecha &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; predeterminado = 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; arrow.mode &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; dirección de flecha &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; 0 = sin flecha, 1 = inversa, 2 = hacia adelante, 3 = bidireccional &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; curved &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; curvatura &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; rango [0,1] &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+class: chapter-slide
+
+.center[# Visualización de redes]
+
+.center[## ¡Hora de escribir código!]
+
+---
+class: left, top
+
+# Paleta de igraph
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-19-1.png" width="504" /&gt;
+]
+---
+class: inverse, center, top
+
+# ¡Tu turno!
+
+Configura las propiedades de visualización de la red del club de karate.
+
+.left[
+1. Utiliza la hoja de repaso de visualización para que los vínculos sean del color de tu elección. 
+2. ¿Qué fragmento del siguiente código hace que las etiquetas desaparezcan?
+3. Cambia la gráfica para que el ancho de los vínculos sea igual al atributo “weight” o peso de los vínculos.  
+4. Cambia el código para que los vínculos sean representados por líneas punteadas. 
+]
+
+<div class="countdown" id="timer_61889b39" style="right:0;bottom:0;left:0;margin:0%;padding:60px;font-size:5em;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+class: center, middle
+
+# Soluciones
+
+---
+
+class: center, middle
+
+# Métricas globales
+
+---
+class: left, top
+
+# Densidad
+
+.center[Número de vínculos que observamos en la red sobre el número de vínculos posibles.]
+
+
+```r
+graph.density(karate)
+```
+
+```
+## [1] 0.1390374
+```
+
+---
+class: left, top
+
+# Transitividad global
+
+Número de tríadas transitivas sobre el total de tríadas.
+
+.pull-left[
+**Tríada transitiva**
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-22-1.png" width="504" /&gt;
+]
+
+.pull-right[
+**Tríada no transitiva**
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-23-1.png" width="504" /&gt;
+]
+
+---
+class: left, top
+
+# Transitividad global
+
+Número de tríadas transitivas sobre el total de tríadas.
+
+
+```r
+transitivity(karate, type = "global")
+```
+
+```
+## [1] 0.2556818
+```
+
+---
+class: inverse, center, top
+
+#¡Tu turno!
+
+
+Explora métricas globales en la red de profesores en una universidad de Inglaterra.
+
+.left[
+1. Calcula la densidad y transitividad de la red de profesores en Inglaterra.
+2. Compara la densidad y transitividad en la red del club de karate con las métricas obtenidas en la red de profesores.
+]
+
+ 
+<div class="countdown" id="timer_61889aa7" style="right:0;bottom:0;left:0;margin:0%;padding:60px;font-size:5em;" data-warnwhen="0">
+<code class="countdown-time"><span class="countdown-digits minutes">03</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+class: left, top
+
+# Soluciones
+
+Densidad
+
+
+```r
+graph.density(UKfaculty)
+```
+
+```
+## [1] 0.1260802
+```
+
+Transitividad
+
+
+```r
+transitivity(UKfaculty, type = "global")
+```
+
+```
+## [1] 0.4734084
+```
+
+---
+class: center, middle
+
+# Métricas a nivel de vértices
+
+---
+# Centralidad de grado
+.pull-left[
+**De entrada**
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-28-1.png" width="504" /&gt;
+]
+
+.pull-right[
+**De salida**
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-29-1.png" width="504" /&gt;
+]
+---
+class: left, top
+
+# Centralidad de grado
+
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-30-1.png" width="504" /&gt;
+]
+
+---
+class: chapter-slide
+
+.center[# Centralidad de grado]
+
+.center[## ¡Hora de escribir código!]
+
+---
+class: left, top
+
+# Centralidad de grado 
+
+
+
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+]
+---
+# Puntos de articulación
+
+Vértices que, al ser removidos, dividen la red en un mayor número de componentes. 
+
+.center[
+
+
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-34-1.png" width="504" /&gt;
+]
+
+---
+class: chapter-slide
+
+.center[# Puntos de articulación]
+
+.center[## ¡Hora de escribir código!]
+---
+class: left, top
+
+# Puntos de articulación
+
+.center[
+&lt;img src="Intro_Nets_slides_files/figure-html/unnamed-chunk-35-1.png" width="504" /&gt;
+]
+
+---
+
+# Recursos
+
++ Wasserman, S., &amp; Faust, K. (2013). Análisis de redes sociales: métodos y aplicaciones (Vol. 10): CIS-Centro de Investigaciones Sociológicas.
+
++ Kolaczyk, E. D., &amp; Csárdi, G. (2014). Statistical Analysis of Network Data with R (Vol. 65): Springer.
+
++ Luke, D. (2015). A User’s Guide to Network Analysis in R. Cham: Springer International Publishing : Imprint: Springer.
+
++ [Tutorial](https://kateto.net/network-visualization) sobre visualización de redes - Katya Ognyanova
+
++ Paquete [statnet](https://statnet.org/) 
+
++ Paquete [igraph](https://igraph.org/r/) 
+
++ Paquete [tidygraph](https://www.data-imaginist.com/2017/introducing-tidygraph/) 
+---
+class: center, middle
+# ¡Gracias!
+
+.center[Me encantará saber tu opinión sobre el taller.
+
+Sigue este [**link**](https://bit.ly/2YqhbTN) para dar tu retroalimentación.]
+
+.center[&lt;br&gt;&lt;br&gt;Las diapositivas fueron creadas mediante el paquete [**xaringan**](https://github.com/yihui/xaringan).]
+
+.center[
+&lt;br&gt;&lt;br&gt;Puedes encontrarme en:&lt;br&gt;
+
+website: [www.mariacramos.com](https://mariacramos.com/)
+&lt;br&gt;&lt;br&gt;.large[twitter: @mariacramosf]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
